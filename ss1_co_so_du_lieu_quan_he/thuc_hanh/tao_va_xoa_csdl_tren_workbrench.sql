@@ -1,1 +1,2 @@
-CREATE DATABASE `my_datase`
+create database my_database;
+drop database my_database;

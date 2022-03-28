@@ -1,7 +1,8 @@
-create table student_management_thuc_hanh.student(
-id int not null,
-name varchar(45)null,
-age int null,
-country varchar(45) null,
-primary key(id)
+create database student_management;
+create table student_management.student(
+id int auto_increment,
+`name` varchar(45),
+age int,
+country varchar(45),
+primary key (id)
 );
