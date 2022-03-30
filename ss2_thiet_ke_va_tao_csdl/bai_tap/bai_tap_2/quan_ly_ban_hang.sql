@@ -23,7 +23,7 @@ primary key (id_product)
 create table order_detail(
 id_order int,
 id_product int,
-quality_order varchar(50),
+quantity_order int,
 primary key(id_order,id_product),
 foreign key (id_order) references `order`(id_order),
 foreign key (id_product) references product(id_product)
