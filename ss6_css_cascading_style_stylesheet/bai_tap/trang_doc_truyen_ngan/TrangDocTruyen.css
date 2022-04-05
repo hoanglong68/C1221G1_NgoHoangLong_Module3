@@ -1,0 +1,43 @@
+body{
+    text-align: justify;
+    background: black;
+}
+img{
+    animation-name:move;
+    animation-duration:10s;
+    animation-iteration-count:infinite;
+    position: relative;
+}
+a{
+    font-size: 50px;
+    text-align: center;
+    color: white;
+}
+p{
+    font-size: 30px;
+    color: white;
+    text-align: justify;
+}
+h5{
+    font-size: larger;
+    text-align: center;
+    color: white;
+}
+
+@keyframes move{
+    0%{
+        left:0px;
+    }
+    50% {
+        left: 1250px;
+    }
+    100%{
+        left:0px;
+    }
+    50%{
+        right:1250px;
+    }
+    0%{
+        right:1250px;
+    }
+}
