@@ -6,6 +6,5 @@ delete from khach_hang
 where khach_hang.ma_khach_hang = ma_xoa;
 end //
 delimiter ;
-
-call sp_xoa_khach_hang(11);
+call sp_xoa_khach_hang(9);
 

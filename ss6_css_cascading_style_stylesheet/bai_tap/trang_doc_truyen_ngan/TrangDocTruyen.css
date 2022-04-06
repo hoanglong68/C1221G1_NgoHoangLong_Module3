@@ -1,43 +1,77 @@
-body{
+body {
     text-align: justify;
-    background: black;
+    background-color: black;
+    background-image: radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px), radial-gradient(white,
+    rgba(255, 255, 255, .15) 1px, transparent 30px), radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 40px),
+    radial-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 2px, transparent 30px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
-img{
-    animation-name:move;
-    animation-duration:10s;
-    animation-iteration-count:infinite;
+
+img#anh {
+    animation-name: move;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
     position: relative;
 }
-a{
+h1 {
     font-size: 50px;
     text-align: center;
     color: white;
 }
-p{
+
+#chuongMuc {
+    font-size: xx-large;
+    text-align: center;
+    color: white;
+}
+
+p {
     font-size: 30px;
     color: white;
     text-align: justify;
+    padding: 100px;
+    font-family: Arial;
 }
-h5{
+
+h5 {
     font-size: larger;
     text-align: center;
     color: white;
 }
 
-@keyframes move{
-    0%{
-        left:0px;
+#up {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    top: 88.5%;
+    right: 0.5%;
+
+}
+
+#up > a > img {
+    width: 80px;
+    height: 80px;
+}
+
+@keyframes move {
+    0% {
+        left: 0px;
     }
     50% {
         left: 1250px;
     }
-    100%{
-        left:0px;
+    100% {
+        left: 0px;
     }
-    50%{
-        right:1250px;
+    50% {
+        right: 1250px;
     }
-    0%{
-        right:1250px;
+    0% {
+        right: 1250px;
     }
+}
+
+html {
+    scroll-behavior: smooth;
 }
