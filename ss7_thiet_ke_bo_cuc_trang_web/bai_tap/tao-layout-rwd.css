@@ -3,7 +3,14 @@
     margin: 0;
     padding: 0;
 }
+
+@media screen and (max-width: 1024px){
+    [class*="col-"] {
+        width: 10%;
+    }
+}
 [class*="col-"] {
+    width: 10%;
     float: left;
     padding: 15px;
     border: 1px solid red;
