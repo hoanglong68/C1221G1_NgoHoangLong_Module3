@@ -15,7 +15,7 @@
 <p>
     <a href="/customers">Back to customer list</a>
 </p>
-<table>
+<table border="1">
     <tr>
         <td>Name: </td>
         <td>${requestScope["customer"].getName()}</td>
