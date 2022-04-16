@@ -15,5 +15,5 @@ public interface ICrudRepository {
     boolean deleteUser(int id) throws SQLException;
 
 
-    boolean updateUser(User user);
+    boolean updateUser(User user) throws SQLException;
 }

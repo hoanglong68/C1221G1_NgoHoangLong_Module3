@@ -9,28 +9,28 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl implements IUserService {
-    ICrudRepository crudRepository = new CrudRepositoryImpl();
+    ICrudRepository iCrudRepository = new CrudRepositoryImpl();
 
     @Override
     public void insertUser(User user) {
-        crudRepository.insertUser(user);
+        iCrudRepository.insertUser(user);
     }
 
     @Override
     public User selectUser(int id) {
-        return crudRepository.selectUser(id);
+        return iCrudRepository.selectUser(id);
     }
 
     @Override
     public List<User> selectAllUsers() {
-        return crudRepository.selectAllUsers();
+        return iCrudRepository.selectAllUsers();
     }
 
     @Override
     public boolean deleteUser(int id) {
         boolean rowDeleted = false;
         try {
-            rowDeleted = crudRepository.deleteUser(id);
+            rowDeleted = iCrudRepository.deleteUser(id);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -39,6 +39,12 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public boolean updateUser(User user) {
-        return false;
+        boolean rowUpdated = false;
+        try {
+            rowUpdated = iCrudRepository.updateUser(user);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rowUpdated;
     }
 }
