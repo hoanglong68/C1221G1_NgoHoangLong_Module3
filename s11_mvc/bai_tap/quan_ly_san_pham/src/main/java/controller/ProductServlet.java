@@ -58,13 +58,13 @@ public class ProductServlet extends HttpServlet {
             case "view":
                 showProductDetail(request, response);
                 break;
+            case "search":
+                System.out.println("search");
+                searchProduct(request, response);
+                break;
             default:
                 showProductList(request, response);
                 break;
-        }
-       String search =  request.getParameter("search");
-        if (search != null){
-            searchProduct(request,response);
         }
     }
 
@@ -88,7 +88,7 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void showProductList(HttpServletRequest request, HttpServletResponse response) {
-        List<Product> productList = this.productService.findAll();
+        List<Product> productList = this.productService.getList();
         request.setAttribute("productList", productList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/list.jsp");
         try {
@@ -214,17 +214,17 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void searchProduct(HttpServletRequest request, HttpServletResponse response) {
-        String message;
+        String message = null;
         String name = request.getParameter("search");
-        Product product = this.productService.findByName(name);
+        List<Product> product = this.productService.findByName(name);
+        System.out.println(product.size());
         RequestDispatcher dispatcher;
-        if (product == null) {
-            message = "product with: " + name + " is not exist !";
+        if (product.isEmpty()) {
+            message = "product with name: " + name + " is not exist !";
             request.setAttribute("message", message);
         } else {
-            message = "";
             request.setAttribute("message", message);
-            request.setAttribute("product", product);
+            request.setAttribute("productFindList", product);
         }
         dispatcher = request.getRequestDispatcher("product/search.jsp");
         try {

@@ -1,50 +1,42 @@
 package services.impl;
 
 import models.Product;
+import repository.ICrudRepository;
 import repository.impl.ProductRepositoryImpl;
 import services.IProductService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ProductServiceImpl implements IProductService {
-    ProductRepositoryImpl productRepository = new ProductRepositoryImpl();
+    ICrudRepository productRepository = new ProductRepositoryImpl();
 
     @Override
-    public List<Product> findAll() {
-        return new ArrayList<>(productRepository.getProductsList().values());
+    public List<Product> getList() {
+        return productRepository.getList();
     }
 
     @Override
     public void save(Product product) {
-        productRepository.getProductsList().put(product.getId(), product);
+        productRepository.save(product);
     }
 
     @Override
     public Product findById(int id) {
-        return productRepository.getProductsList().get(id);
+        return productRepository.findById(id);
     }
 
     @Override
-    public Product findByName(String name) {
-        Product product = null;
-        for (Map.Entry<Integer, Product> entry : productRepository.getProductsList().entrySet()) {
-            if (entry.getValue().getName().contains(name)) {
-                product = entry.getValue();
-                break;
-            }
-        }
-        return product;
+    public List<Product> findByName(String name) {
+        return productRepository.findByName(name);
     }
 
     @Override
     public void update(int id, Product product) {
-        productRepository.getProductsList().put(id, product);
+        productRepository.update(id, product);
     }
 
     @Override
     public void remove(int id) {
-        productRepository.getProductsList().remove(id);
+        productRepository.remove(id);
     }
 }

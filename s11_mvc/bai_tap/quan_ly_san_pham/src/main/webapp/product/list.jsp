@@ -39,13 +39,42 @@ Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="a
 </table>
 <form method="get">
     <label>
+        <input type="hidden" name="action" value="search">
         <input type="text" name="search" placeholder="enter name to search">
         <button type="submit">Search</button>
     </label>
 </form>
-<c:if test="${!empty message}">
-    <%@ include file="search.jsp" %>
-</c:if>
+<c:choose>
+    <c:when test="${message!= null}">
+        <h2>${message}</h2>
+    </c:when>
+    <c:otherwise>
+        <table border="1" class="table table-view">
+            <c:forEach items="${productFindList}" var="productFind">
+                <tr>
+                    <td>Id: </td>
+                    <td>${productFind.getId()}</td>
+                </tr>
+                <tr>
+                    <td>Name: </td>
+                    <td>${productFind.getName()}</td>
+                </tr>
+                <tr>
+                    <td>Price: </td>
+                    <td>${productFind.getPrice()}</td>
+                </tr>
+                <tr>
+                    <td>Detail: </td>
+                    <td>${productFind.getDetail()}</td>
+                </tr>
+                <tr>
+                    <td>Manufacturer: </td>
+                    <td>${productFind.getManufacturer()}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:otherwise>
+</c:choose>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -57,32 +86,3 @@ Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="a
         crossorigin="anonymous"></script>
 </body>
 </html>
-<%--<c:choose>--%>
-<%--    <c:when test="${!message.equals('')}">--%>
-<%--        <h2>${message}</h2>--%>
-<%--    </c:when>--%>
-<%--    <c:otherwise>--%>
-<%--        <table border="1" class="table table-view">--%>
-<%--            <tr>--%>
-<%--                <td>Id: </td>--%>
-<%--                <td>${product.getId()}</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Name: </td>--%>
-<%--                <td>${product.getName()}</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Price: </td>--%>
-<%--                <td>${product.getPrice()}</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Detail: </td>--%>
-<%--                <td>${product.getDetail()}</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Manufacturer: </td>--%>
-<%--                <td>${product.getManufacturer()}</td>--%>
-<%--            </tr>--%>
-<%--        </table>--%>
-<%--    </c:otherwise>--%>
-<%--</c:choose>--%>

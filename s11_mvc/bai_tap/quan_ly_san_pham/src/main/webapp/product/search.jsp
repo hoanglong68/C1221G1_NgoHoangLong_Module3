@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Product Information Searched</title>
@@ -13,30 +14,39 @@
 Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<input type="text" >
 <h1>Product Information Searched</h1>
-<table border="1" class="table table-view">
-    <tr>
-        <td>Id: </td>
-        <td>${product.getId()}</td>
-    </tr>
-    <tr>
-        <td>Name: </td>
-        <td>${product.getName()}</td>
-    </tr>
-    <tr>
-        <td>Price: </td>
-        <td>${product.getPrice()}</td>
-    </tr>
-    <tr>
-        <td>Detail: </td>
-        <td>${product.getDetail()}</td>
-    </tr>
-    <tr>
-        <td>Manufacturer: </td>
-        <td>${product.getManufacturer()}</td>
-    </tr>
-</table>
+<button><a href="/products">Back to Product List</a></button>
+<c:choose>
+    <c:when test="${message!= null}">
+        <h2 style="color: red">${message}</h2>
+    </c:when>
+    <c:otherwise>
+        <table border="1" class="table table-view">
+            <c:forEach items="${productFindList}" var="productFind">
+                <tr>
+                    <td>Id: </td>
+                    <td>${productFind.getId()}</td>
+                </tr>
+                <tr>
+                    <td>Name: </td>
+                    <td>${productFind.getName()}</td>
+                </tr>
+                <tr>
+                    <td>Price: </td>
+                    <td>${productFind.getPrice()}</td>
+                </tr>
+                <tr>
+                    <td>Detail: </td>
+                    <td>${productFind.getDetail()}</td>
+                </tr>
+                <tr>
+                    <td>Manufacturer: </td>
+                    <td>${productFind.getManufacturer()}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:otherwise>
+</c:choose>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

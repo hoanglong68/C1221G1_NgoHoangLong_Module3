@@ -5,13 +5,13 @@ import models.Product;
 import java.util.List;
 
 public interface IProductService {
-    List<Product> findAll();
+    List<Product> getList();
 
     void save(Product product);
 
     Product findById(int id);
 
-    Product findByName(String name);
+    List<Product> findByName(String name);
 
     void update(int id, Product product);
 
