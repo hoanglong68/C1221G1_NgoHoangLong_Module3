@@ -16,7 +16,8 @@
 </head>
 <body>
 <center>
-    <h1>User Management</h1>
+    <h1><a href="/users">User Management</a></h1>
+    <hr>
     <h2>
         <a href="/users?action=create">Add New User</a>
     </h2>
@@ -26,7 +27,9 @@
         <caption><h2>List of Users</h2></caption>
         <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Name
+                <button><a href="/users?action=sort">Sort</a></button>
+            </th>
             <th>Email</th>
             <th>Country</th>
             <th>Actions</th>
@@ -45,6 +48,39 @@
         </c:forEach>
     </table>
 </div>
+<hr>
+<form method="get">
+    <input type="hidden" name="action" value="search">
+    <input type="text" name="search" placeholder="enter country to search">
+    <button type="submit">Search</button>
+</form>
+<c:choose>
+    <c:when test="${message!= null}">
+        <h2>${message}</h2>
+    </c:when>
+    <c:otherwise>
+        <table border="1" class="table table-view">
+            <c:forEach items="${userFindingList}" var="userFind">
+                <tr>
+                    <td>Id:</td>
+                    <td>${userFind.getId()}</td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td>${userFind.getName()}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>${userFind.getEmail()}</td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td>${userFind.getCountry()}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:otherwise>
+</c:choose>
 <%--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"--%>
 <%--     aria-hidden="true">--%>
 <%--    <div class="modal-dialog" role="document">--%>
