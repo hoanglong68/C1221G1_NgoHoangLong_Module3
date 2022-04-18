@@ -6,15 +6,29 @@ import repository.impl.CrudRepositoryImpl;
 import service.IUserService;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserServiceImpl implements IUserService {
     ICrudRepository iCrudRepository = new CrudRepositoryImpl();
 
     @Override
     public void insertUser(User user) {
+        Map<String, String> errorMap = new HashMap<>();
         try {
-            iCrudRepository.insertUser(user);
+            if ("".equals(user.getName())) {
+                errorMap.put("name", "name is not empty !");
+            } else if (!user.getName().matches("^([A-Za-z]+\\s*)+$")) {
+                errorMap.put("name", "name is not valid !");
+            } else if ("".equals(user.getEmail())) {
+                errorMap.put("email", "email is not empty !");
+            } else if (!user.getEmail().matches("^(.+)@(.+)$")) {
+                errorMap.put("email", "name is not valid !");
+            }
+            if (errorMap.isEmpty()) {
+                iCrudRepository.insertUser(user);
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

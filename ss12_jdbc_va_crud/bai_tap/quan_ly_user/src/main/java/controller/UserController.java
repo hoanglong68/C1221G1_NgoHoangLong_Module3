@@ -49,11 +49,11 @@ public class UserController extends HttpServlet {
             case "edit":
                 showEditForm(request, response);
                 break;
-            case "delete":
-                deleteUser(request, response);
-                break;
             case "search":
                 searchUserByCountry(request, response);
+                break;
+            case "delete":
+                deleteUser(request, response);
                 break;
             case "sort":
                 listSortedUser(request, response);

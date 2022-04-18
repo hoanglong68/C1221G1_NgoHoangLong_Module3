@@ -42,8 +42,13 @@
                 <td><c:out value="${user.country}"/></td>
                 <td>
                     <a href="/users?action=edit&id=${user.id}">Edit</a>
-                    <a href="/users?action=delete&id=${user.id}">Delete</a>
+                        <%--                    modal--%>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                            onclick="getId(${user.id})">
+                        Delete
+                    </button>
                 </td>
+
             </tr>
         </c:forEach>
     </table>
@@ -81,27 +86,37 @@
         </table>
     </c:otherwise>
 </c:choose>
-<%--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"--%>
-<%--     aria-hidden="true">--%>
-<%--    <div class="modal-dialog" role="document">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-header">--%>
-<%--                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>--%>
-<%--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-<%--                    <span aria-hidden="true">&times;</span>--%>
-<%--                </button>--%>
-<%--            </div>--%>
-<%--            <div class="modal-body">--%>
-<%--                ...--%>
-<%--            </div>--%>
-<%--            <div class="modal-footer">--%>
-<%--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
-<%--                <button type="button" class="btn btn-primary">Save changes</button>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="get">
+                <div class="modal-body">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" id="id-to-delete" name="id">
+                    Are you sure ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button type="submit" class="btn btn-danger">Delete it !</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
+<script>
+    function getId(id) {
+        document.getElementById("id-to-delete").value = id
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
