@@ -181,8 +181,7 @@ public class UserController extends HttpServlet {
                 request.setAttribute("message", message);
                 request.setAttribute("userList", userList);
             } else {
-                request.setAttribute("userFindingList", userFindingList);
-                request.setAttribute("userList", userList);
+                request.setAttribute("userList", userFindingList);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
