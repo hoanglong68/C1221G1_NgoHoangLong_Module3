@@ -3,6 +3,7 @@ package repository.impl;
 import model.User;
 import repository.ICrudRepository;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,9 +62,10 @@ public class CrudRepositoryImpl implements ICrudRepository {
     public List<User> selectAllUser() throws SQLException {
         List<User> userList = new ArrayList<>();
         User user;
-        PreparedStatement preparedStatement = baseRepository.getConnection().prepareStatement
-                ("select id,`name`,email,country from users");
-        ResultSet resultSet = preparedStatement.executeQuery();
+//        PreparedStatement preparedStatement = baseRepository.getConnection().prepareStatement
+//                ("select id,`name`,email,country from users");
+        CallableStatement callableStatement = baseRepository.getConnection().prepareCall("call show_all_users;");
+        ResultSet resultSet = callableStatement.executeQuery();
         while (resultSet.next()) {
             user = new User();
             user.setId(resultSet.getInt("id"));
@@ -109,10 +111,11 @@ public class CrudRepositoryImpl implements ICrudRepository {
     @Override
     public boolean deleteUser(int id) throws SQLException {
         boolean rowDeleted;
-        PreparedStatement preparedStatement = baseRepository.getConnection().prepareStatement
-                ("delete from users where id = ?;");
-        preparedStatement.setInt(1, id);
-        rowDeleted = preparedStatement.executeUpdate() > 0;
+//        PreparedStatement preparedStatement = baseRepository.getConnection().prepareStatement
+//                ("delete from users where id = ?;");
+        CallableStatement callableStatement = baseRepository.getConnection().prepareCall("call delete_user(?)");
+        callableStatement.setInt(1, id);
+        rowDeleted = callableStatement.executeUpdate() > 0;
         return rowDeleted;
     }
 }
