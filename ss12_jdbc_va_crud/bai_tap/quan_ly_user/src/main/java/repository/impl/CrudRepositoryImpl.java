@@ -98,13 +98,15 @@ public class CrudRepositoryImpl implements ICrudRepository {
     @Override
     public boolean updateUser(User user) throws SQLException {
         boolean rowUpdated;
-        PreparedStatement preparedStatement = baseRepository.getConnection().prepareStatement
-                ("update users set `name` = ?, email = ?, country = ? where id = ?;");
-        preparedStatement.setString(1, user.getName());
-        preparedStatement.setString(2, user.getEmail());
-        preparedStatement.setString(3, user.getCountry());
-        preparedStatement.setInt(4, user.getId());
-        rowUpdated = preparedStatement.executeUpdate() > 0;
+//        PreparedStatement preparedStatement = baseRepository.getConnection().prepareStatement
+//                ("update users set `name` = ?, email = ?, country = ? where id = ?;");
+        CallableStatement callableStatement = baseRepository.getConnection().prepareCall
+                ("{call edit_user(?,?,?,?)}");
+        callableStatement.setString(1, user.getName());
+        callableStatement.setString(2, user.getEmail());
+        callableStatement.setString(3, user.getCountry());
+        callableStatement.setInt(4, user.getId());
+        rowUpdated = callableStatement.executeUpdate() > 0;
         return rowUpdated;
     }
 
@@ -113,7 +115,7 @@ public class CrudRepositoryImpl implements ICrudRepository {
         boolean rowDeleted;
 //        PreparedStatement preparedStatement = baseRepository.getConnection().prepareStatement
 //                ("delete from users where id = ?;");
-        CallableStatement callableStatement = baseRepository.getConnection().prepareCall("call delete_user(?)");
+        CallableStatement callableStatement = baseRepository.getConnection().prepareCall("{call delete_user(?)}");
         callableStatement.setInt(1, id);
         rowDeleted = callableStatement.executeUpdate() > 0;
         return rowDeleted;

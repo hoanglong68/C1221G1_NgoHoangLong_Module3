@@ -46,7 +46,7 @@
                 <td><c:out value="${user.country}"/></td>
                 <td>
                     <a href="/users?action=edit&id=${user.id}">Edit</a>
-                        <%--                    modal--%>
+                        <%-- modal--%>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
                             onclick="getId(${user.id})">
                         Delete

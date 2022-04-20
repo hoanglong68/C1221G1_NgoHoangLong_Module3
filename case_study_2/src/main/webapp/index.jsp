@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Furama</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
@@ -45,7 +45,7 @@
                         <a class="nav-link text-white p-3" href="/customer?action=list">Customer</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link text-white p-3" href="#">Service</a>
+                        <a class="nav-link text-white p-3" href="/service?action=list">Service</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link text-white p-3" href="#">Contract</a>

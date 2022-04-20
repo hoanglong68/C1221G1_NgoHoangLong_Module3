@@ -6,6 +6,15 @@ import model.customer.CustomerType;
 import java.util.List;
 
 public interface ICustomerRepository extends ICrudRepository {
+    void insertCustomer(Customer customer);
+
     List<Customer> displayCustomerList();
-    List<CustomerType> customerTypeList();
+
+    Customer findCustomerById(int id);
+
+    boolean deleteCustomer(int id);
+
+    boolean updateCustomer(Customer customer);
+
+    List<Customer> searchCustomer(String name, String email, int idCustomerType);
 }
