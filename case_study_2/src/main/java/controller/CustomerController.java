@@ -2,10 +2,10 @@ package controller;
 
 import model.customer.Customer;
 import model.customer.CustomerType;
-import service.ICustomerService;
-import service.ICustomerTypeService;
-import service.impl.CustomerServiceImpl;
-import service.impl.CustomerTypeServiceImpl;
+import service.customer.ICustomerService;
+import service.customer.ICustomerTypeService;
+import service.customer.customer_impl.CustomerServiceImpl;
+import service.customer.customer_impl.CustomerTypeServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

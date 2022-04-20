@@ -15,7 +15,6 @@
 <center>
     <h1>Service Management</h1>
     <h2>
-<%--        <a href="/service?action=list">List All Service</a>--%>
         <a href="/service?action=list">List All Service</a>
     </h2>
 </center>
@@ -50,7 +49,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Id Rent Type:</th>
+                <th>Rent Type:</th>
                 <td>
                     <select name="rentType" id="rentType">
                         <c:forEach items="${rentTypeList}" var="rentType">
@@ -60,7 +59,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Id Service Type:</th>
+                <th>Service Type:</th>
                 <td>
                     <select name="serviceType" id="serviceType">
                         <c:forEach items="${serviceTypeList}" var="serviceType">
@@ -73,9 +72,8 @@
                 <th>Standard Room:</th>
                 <td>
                     <select name="standardRoom" id="standardRoom">
-                        <c:forEach items="${standardRoomList}" var="standardRoom">
-                            <option value="${standardRoom.idStandardRoom}">${standardRoom.nameStandardRoom}</option>
-                        </c:forEach>
+                        <option value="Vip">Vip</option>
+                        <option value="Normal">Normal</option>
                     </select>
                 </td>
             </tr>
