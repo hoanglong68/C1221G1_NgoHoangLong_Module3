@@ -4,6 +4,7 @@ import model.service.Service;
 import repository.BaseRepository;
 import repository.service.IServiceRepository;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,5 +42,27 @@ public class ServiceRepositoryImpl implements IServiceRepository {
             throwables.printStackTrace();
         }
         return serviceList;
+    }
+
+    @Override
+    public void insertService(Service service) {
+        try {
+            CallableStatement callableStatement = baseRepository.getConnection().prepareCall
+                    ("{call sp_them_dich_vu(?,?,?,?,?,?,?,?,?,?)}");
+            callableStatement.setString(1, service.getName());
+            callableStatement.setInt(2, service.getArea());
+            callableStatement.setDouble(3, service.getPrice());
+            callableStatement.setInt(4, service.getCapacity());
+            callableStatement.setInt(5, service.getIdRentType());
+            callableStatement.setInt(6, service.getIdServiceType());
+            callableStatement.setString(7, service.getStandardRoom());
+            callableStatement.setString(8, service.getConvenient());
+            callableStatement.setDouble(9, service.getPoolArea());
+            callableStatement.setInt(10, service.getFloors());
+            callableStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 }

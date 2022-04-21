@@ -105,11 +105,11 @@ create table hop_dong
     tien_dat_coc      double   not null,
     ma_nhan_vien      int      not null,
     ma_khach_hang     int      ,
-    ma_dich_vu        int      not null,
+    ma_dich_vu        int      ,
     primary key (ma_hop_dong),
     foreign key (ma_nhan_vien) references nhan_vien (ma_nhan_vien),
-    foreign key (ma_khach_hang) references khach_hang (ma_khach_hang),
-    foreign key (ma_dich_vu) references dich_vu (ma_dich_vu)
+    foreign key (ma_khach_hang) references khach_hang (ma_khach_hang) on delete set null,
+    foreign key (ma_dich_vu) references dich_vu (ma_dich_vu) on delete set null
 );
 
 create table hop_dong_chi_tiet

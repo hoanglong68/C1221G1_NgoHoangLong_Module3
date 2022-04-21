@@ -108,24 +108,45 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
         List<Customer> customerList = new ArrayList<>();
         Customer customer = null;
         try {
-            CallableStatement callableStatement = baseRepository.getConnection().prepareCall
-                    ("{call sp_tim_khach_hang(?,?,?)}");
-            callableStatement.setString(1, '%' + name + '%');
-            callableStatement.setString(2, '%' + email + '%');
-            callableStatement.setInt(3, idCustomerType);
-            ResultSet resultSet = callableStatement.executeQuery();
-            while (resultSet.next()) {
-                customer = new Customer();
-                customer.setIdCustomer(resultSet.getInt("ma_khach_hang"));
-                customer.setName(resultSet.getString("ho_ten"));
-                customer.setDateOfBirth(resultSet.getString("ngay_sinh"));
-                customer.setGender(resultSet.getInt("gioi_tinh"));
-                customer.setIdCard(resultSet.getString("so_cmnd"));
-                customer.setPhone(resultSet.getString("so_dien_thoai"));
-                customer.setEmail(resultSet.getString("email"));
-                customer.setAddress(resultSet.getString("dia_chi"));
-                customer.setType(resultSet.getInt("ma_loai_khach"));
-                customerList.add(customer);
+            if (idCustomerType > 0) {
+                CallableStatement callableStatement = baseRepository.getConnection().prepareCall
+                        ("{call sp_tim_khach_hang(?,?,?)}");
+                callableStatement.setString(1, '%' + name + '%');
+                callableStatement.setString(2, '%' + email + '%');
+                callableStatement.setInt(3, idCustomerType);
+                ResultSet resultSet = callableStatement.executeQuery();
+                while (resultSet.next()) {
+                    customer = new Customer();
+                    customer.setIdCustomer(resultSet.getInt("ma_khach_hang"));
+                    customer.setName(resultSet.getString("ho_ten"));
+                    customer.setDateOfBirth(resultSet.getString("ngay_sinh"));
+                    customer.setGender(resultSet.getInt("gioi_tinh"));
+                    customer.setIdCard(resultSet.getString("so_cmnd"));
+                    customer.setPhone(resultSet.getString("so_dien_thoai"));
+                    customer.setEmail(resultSet.getString("email"));
+                    customer.setAddress(resultSet.getString("dia_chi"));
+                    customer.setType(resultSet.getInt("ma_loai_khach"));
+                    customerList.add(customer);
+                }
+            } else {
+                CallableStatement callableStatement = baseRepository.getConnection().prepareCall
+                        ("{call sp_tim_khach_hang_2_tham_so(?,?)}");
+                callableStatement.setString(1, '%' + name + '%');
+                callableStatement.setString(2, '%' + email + '%');
+                ResultSet resultSet = callableStatement.executeQuery();
+                while (resultSet.next()) {
+                    customer = new Customer();
+                    customer.setIdCustomer(resultSet.getInt("ma_khach_hang"));
+                    customer.setName(resultSet.getString("ho_ten"));
+                    customer.setDateOfBirth(resultSet.getString("ngay_sinh"));
+                    customer.setGender(resultSet.getInt("gioi_tinh"));
+                    customer.setIdCard(resultSet.getString("so_cmnd"));
+                    customer.setPhone(resultSet.getString("so_dien_thoai"));
+                    customer.setEmail(resultSet.getString("email"));
+                    customer.setAddress(resultSet.getString("dia_chi"));
+                    customer.setType(resultSet.getInt("ma_loai_khach"));
+                    customerList.add(customer);
+                }
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

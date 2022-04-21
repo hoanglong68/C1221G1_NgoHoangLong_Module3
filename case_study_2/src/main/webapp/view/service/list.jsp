@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>List Service</title>
@@ -21,7 +22,7 @@
        style="width: 85%">
     <thead>
     <tr>
-        <th>Id</th>
+        <th>#</th>
         <th>Name</th>
         <th>Area</th>
         <th>Price</th>
@@ -35,12 +36,12 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="service" items="${serviceList}">
+    <c:forEach var="service" items="${serviceList}" varStatus="status">
         <tr>
-            <th scope="row">${service.idService}</th>
+            <th>${status.count}</th>
             <td>${service.name}</td>
             <td>${service.area}</td>
-            <td>${service.price}</td>
+            <td><fmt:formatNumber>${service.price}</fmt:formatNumber></td>
             <td>${service.capacity}</td>
             <td>
                 <c:forEach items="${rentTypeList}" var="rentType">
@@ -83,7 +84,7 @@
         $('#tableCustomer').dataTable({
             "dom": 'lrtip',
             "lengthChange": false,
-            "pageLength": 5
+            "pageLength": 10
         });
     });
 </script>

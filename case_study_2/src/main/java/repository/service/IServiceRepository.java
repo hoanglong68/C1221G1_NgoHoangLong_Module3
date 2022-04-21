@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IServiceRepository extends ICrudRepository {
     List<Service> displayServiceList();
+
+    void insertService(Service service);
 }

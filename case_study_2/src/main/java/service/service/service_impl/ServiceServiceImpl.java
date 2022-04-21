@@ -14,4 +14,9 @@ public class ServiceServiceImpl implements IServiceService {
     public List<Service> displayServiceList() {
         return serviceRepository.displayServiceList();
     }
+
+    @Override
+    public void insertService(Service service) {
+        serviceRepository.insertService(service);
+    }
 }

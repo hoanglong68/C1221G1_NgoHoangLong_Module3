@@ -100,6 +100,9 @@ public class CustomerController extends HttpServlet {
         Integer type = Integer.parseInt(request.getParameter("type"));
         Customer customer = new Customer(name, dateOfBirth, gender, idCard, phone, email, address, type);
         customerService.insertCustomer(customer);
+        List<CustomerType> customerTypeList = customerTypeService.customerTypeList();
+        request.setAttribute("customerTypeList", customerTypeList);
+        request.setAttribute("messageCreate","Create successful !");
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/create.jsp");
         try {
             dispatcher.forward(request, response);
@@ -112,7 +115,10 @@ public class CustomerController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         customerService.deleteCustomer(id);
         List<Customer> customerList = customerService.displayCustomerList();
+        List<CustomerType> customerTypeList = customerTypeService.customerTypeList();
+        request.setAttribute("customerTypeList", customerTypeList);
         request.setAttribute("customerList", customerList);
+        request.setAttribute("messageDelete","Delete successful !");
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/list.jsp");
         try {
             dispatcher.forward(request, response);
@@ -148,7 +154,12 @@ public class CustomerController extends HttpServlet {
         existingCustomer.setType(Integer.parseInt(request.getParameter("type")));
         customerService.updateCustomer(existingCustomer);
         request.setAttribute("customer", existingCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/edit.jsp");
+        request.setAttribute("messageEdit","Edit successful !");
+        List<Customer> customerList = customerService.displayCustomerList();
+        List<CustomerType> customerTypeList = customerTypeService.customerTypeList();
+        request.setAttribute("customerTypeList", customerTypeList);
+        request.setAttribute("customerList", customerList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/list.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {

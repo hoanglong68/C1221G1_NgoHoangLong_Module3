@@ -24,6 +24,16 @@
     </div>
     <div class="col-6 mx-auto">
         <h1 class="text-center"><a href="/">Furama Menu</a></h1>
+        <c:if test="${messageDelete != null}">
+            <div class="alert alert-success" role="alert">
+                ${messageDelete}
+            </div>
+        </c:if>
+        <c:if test="${messageEdit != null}">
+            <div class="alert alert-success" role="alert">
+                ${messageEdit}
+            </div>
+        </c:if>
     </div>
     <div class="col-3">
         <form class="form-inline" method="get">
@@ -33,6 +43,7 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search by email" aria-label="Search"
                    name="searchByEmail">
             <select name="searchByCustomerType" id="searchByCustomerType">
+                <option value="0"></option>
                 <c:forEach items="${customerTypeList}" var="type">
                     <option value="${type.idCustomerType}">${type.nameCustomerType}</option>
                 </c:forEach>
@@ -46,7 +57,8 @@
        style="width: 85%">
     <thead>
     <tr>
-        <th>Id</th>
+        <th>#</th>
+<%--        <th>Code</th>--%>
         <th>Name</th>
         <th>Date Of Birth</th>
         <th>Gender</th>
@@ -60,9 +72,10 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="customer" items="${customerList}">
+    <c:forEach var="customer" items="${customerList}" varStatus="status">
         <tr>
-            <th scope="row">${customer.idCustomer}</th>
+            <th>${status.count}</th>
+<%--            <th>${customer.codeCustomer}</th>--%>
             <td>${customer.name}</td>
             <td>${customer.dateOfBirth}</td>
             <td>
@@ -98,7 +111,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -142,7 +155,7 @@
         $('#tableCustomer').dataTable({
             "dom": 'lrtip',
             "lengthChange": false,
-            "pageLength": 5
+            "pageLength": 10
         });
     });
 </script>
