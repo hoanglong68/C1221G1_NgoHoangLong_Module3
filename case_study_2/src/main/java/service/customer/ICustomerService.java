@@ -4,13 +4,18 @@ import model.customer.Customer;
 import service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ICustomerService extends IService {
     List<Customer> displayCustomerList();
-    void insertCustomer(Customer customer);
+
+    Map<String, String> insertCustomer(Customer customer);
+
     Customer findCustomerById(int id);
+
     boolean deleteCustomer(int id);
-    boolean updateCustomer(Customer customer);
+
+    Map<String, String> updateCustomer(Customer existingCustomer);
 
     List<Customer> searchCustomer(String name, String email, int idCustomerType);
 }

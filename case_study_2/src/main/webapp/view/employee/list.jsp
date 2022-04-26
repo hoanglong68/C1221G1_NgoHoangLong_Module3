@@ -24,14 +24,9 @@
     </div>
     <div class="col-6 mx-auto">
         <h1 class="text-center"><a href="/">Furama Menu</a></h1>
-        <c:if test="${messageDelete != null}">
+        <c:if test="${message != null}">
             <div class="alert alert-success" role="alert">
-                    ${messageDelete}
-            </div>
-        </c:if>
-        <c:if test="${messageEdit != null}">
-            <div class="alert alert-success" role="alert">
-                    ${messageEdit}
+                    ${message}
             </div>
         </c:if>
     </div>
@@ -44,12 +39,6 @@
                 <option value="0"></option>
                 <c:forEach items="${employeePositionList}" var="employeePosition">
                     <option value="${employeePosition.idPosition}">${employeePosition.namePosition}</option>
-                </c:forEach>
-            </select>
-            <select name="searchByEmployeeDegree" id="searchByEmployeeDegree">
-                <option value="0"></option>
-                <c:forEach items="${employeeDegreeList}" var="employeeDegree">
-                    <option value="${employeeDegree.idDegree}">${employeeDegree.nameDegree}</option>
                 </c:forEach>
             </select>
             <select name="searchByEmployeeDivision" id="searchByEmployeeDivision">
@@ -114,7 +103,7 @@
                 </c:forEach>
             </td>
             <td>
-                    <button class="btn btn-info" type="button"><a href="/customer?action=edit&id=${employee.idEmployee}"
+                    <button class="btn btn-info" type="button"><a href="/employee?action=edit&id=${employee.idEmployee}"
                                                               style="color: white">Edit</a></button>
             </td>
             <td>
@@ -175,7 +164,7 @@
         $('#tableCustomer').dataTable({
             "dom": 'lrtip',
             "lengthChange": false,
-            "pageLength": 10
+            "pageLength": 5
         });
     });
 </script>

@@ -24,14 +24,9 @@
     </div>
     <div class="col-6 mx-auto">
         <h1 class="text-center"><a href="/">Furama Menu</a></h1>
-        <c:if test="${messageDelete != null}">
+        <c:if test="${message != null}">
             <div class="alert alert-success" role="alert">
-                ${messageDelete}
-            </div>
-        </c:if>
-        <c:if test="${messageEdit != null}">
-            <div class="alert alert-success" role="alert">
-                ${messageEdit}
+                    ${message}
             </div>
         </c:if>
     </div>
@@ -58,7 +53,6 @@
     <thead>
     <tr>
         <th>#</th>
-<%--        <th>Code</th>--%>
         <th>Name</th>
         <th>Date Of Birth</th>
         <th>Gender</th>
@@ -75,7 +69,6 @@
     <c:forEach var="customer" items="${customerList}" varStatus="status">
         <tr>
             <th>${status.count}</th>
-<%--            <th>${customer.codeCustomer}</th>--%>
             <td>${customer.name}</td>
             <td>${customer.dateOfBirth}</td>
             <td>
@@ -88,7 +81,7 @@
             <td>${customer.address}</td>
             <td>
                 <c:forEach items="${customerTypeList}" var="type">
-                    <c:if test="${customer.type eq type.idCustomerType}">
+                    <c:if test="${customer.idColor eq type.idCustomerType}">
                         ${type.nameCustomerType}
                     </c:if>
                 </c:forEach>
@@ -155,7 +148,7 @@
         $('#tableCustomer').dataTable({
             "dom": 'lrtip',
             "lengthChange": false,
-            "pageLength": 10
+            "pageLength": 5
         });
     });
 </script>

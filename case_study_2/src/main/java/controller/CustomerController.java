@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "CustomerController", urlPatterns = "/customer")
 public class CustomerController extends HttpServlet {
@@ -99,32 +100,35 @@ public class CustomerController extends HttpServlet {
         String address = request.getParameter("address");
         Integer type = Integer.parseInt(request.getParameter("type"));
         Customer customer = new Customer(name, dateOfBirth, gender, idCard, phone, email, address, type);
-        customerService.insertCustomer(customer);
-        List<CustomerType> customerTypeList = customerTypeService.customerTypeList();
-        request.setAttribute("customerTypeList", customerTypeList);
-        request.setAttribute("messageCreate","Create successful !");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/create.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
+        Map<String, String> validate = customerService.insertCustomer(customer);
+        if (validate.isEmpty()) {
+            request.setAttribute("message", "Create successful !");
+            List<CustomerType> customerTypeList = customerTypeService.customerTypeList();
+            request.setAttribute("customerTypeList", customerTypeList);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/create.jsp");
+            try {
+                dispatcher.forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            request.setAttribute("validate", validate);
+            List<CustomerType> customerTypeList = customerTypeService.customerTypeList();
+            request.setAttribute("customerTypeList", customerTypeList);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/create.jsp");
+            try {
+                dispatcher.forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         customerService.deleteCustomer(id);
-        List<Customer> customerList = customerService.displayCustomerList();
-        List<CustomerType> customerTypeList = customerTypeService.customerTypeList();
-        request.setAttribute("customerTypeList", customerTypeList);
-        request.setAttribute("customerList", customerList);
-        request.setAttribute("messageDelete","Delete successful !");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/list.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
-        }
+        request.setAttribute("message", "Delete successful !");
+        this.listCustomer(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
@@ -152,18 +156,13 @@ public class CustomerController extends HttpServlet {
         existingCustomer.setEmail(request.getParameter("email"));
         existingCustomer.setAddress(request.getParameter("address"));
         existingCustomer.setType(Integer.parseInt(request.getParameter("type")));
-        customerService.updateCustomer(existingCustomer);
-        request.setAttribute("customer", existingCustomer);
-        request.setAttribute("messageEdit","Edit successful !");
-        List<Customer> customerList = customerService.displayCustomerList();
-        List<CustomerType> customerTypeList = customerTypeService.customerTypeList();
-        request.setAttribute("customerTypeList", customerTypeList);
-        request.setAttribute("customerList", customerList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/list.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
+        Map<String, String> validate = customerService.updateCustomer(existingCustomer);
+        if (validate.isEmpty()) {
+            request.setAttribute("message", "Edit successful !");
+            this.listCustomer(request, response);
+        } else {
+            request.setAttribute("validate", validate);
+            this.showEditForm(request,response);
         }
     }
 
